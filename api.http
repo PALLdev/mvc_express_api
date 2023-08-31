@@ -1,0 +1,40 @@
+GET http://localhost:8080/games
+
+###
+
+GET  http://localhost:8080/games/juego-1
+
+###
+POST http://localhost:8080/games
+Content-Type: application/json
+
+{
+    "players": [
+        {
+            "name": "Martin"
+        },
+        {
+            "name": "Barbara"
+        }
+    ]
+}
+
+### 
+PATCH  http://localhost:8080/games/52e61763-f747-4a52-b162-bac2a152422e
+Content-Type: application/json
+
+{
+    "players": [
+        {
+            "name": "Talia",
+            "points": 300
+        },
+        {
+            "name": "Barbara"
+        }
+    ]
+}
+
+###
+DELETE http://localhost:8080/games/52e61763-f747-4a52-b162-bac2a152422e
+Content-Type: application/json

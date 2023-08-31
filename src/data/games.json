@@ -1,0 +1,85 @@
+{
+    "games":[
+        {
+            "id": "juego-1",
+            "players": [
+                {
+                    "name": "Juan",
+                    "points": 20
+                },
+                {
+                    "name": "Pedro",
+                    "points": 30
+                },
+                {
+                    "name": "Manuel",
+                    "points": 12
+                }
+            ]
+        },
+        {
+            "id": "juego-2",
+            "players": [
+                {
+                    "name": "Luis",
+                    "points": 300
+                },
+                {
+                    "name": "Magaly",
+                    "points": 500
+                },
+                {
+                    "name": "Pablo",
+                    "points": 200
+                }
+            ]
+        },
+        {
+            "id": "juego-3",
+            "players": [
+                {
+                    "name": "Vale",
+                    "points": 200
+                },
+                {
+                    "name": "Gisel",
+                    "points": 400
+                }
+            ]
+        },
+        {
+            "id": "juego-4",
+            "players": [
+                {
+                    "name": "Perla",
+                    "points": 200
+                },
+                {
+                    "name": "Julio",
+                    "points": 100
+                },
+                {
+                    "name": "Claudio",
+                    "points": 160
+                },
+                {
+                    "name": "Ruth",
+                    "points": 300
+                }
+            ]
+        },
+        {
+            "id": "juego-5",
+            "players": [
+                {
+                    "name": "Nestor",
+                    "points": 300
+                },
+                {
+                    "name": "Gabriel",
+                    "points": 400
+                }
+            ]
+        }
+    ]
+ }
