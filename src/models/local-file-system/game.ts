@@ -1,8 +1,8 @@
 import { randomUUID } from 'node:crypto';
-import { games } from '../data/games.json'
+import { games } from '../../data/games.json'
 
 export class GameModel {
-    id: string
+    id?: string
     players: { name: string, points: number }[]
 
     constructor(id: GameModel['id'], players: GameModel['players']) {
@@ -18,7 +18,7 @@ export class GameModel {
         return games.find(game => game.id === id)
     }
 
-    static async create(input: any) {
+    static async create(input: GameModel) {
         const newGame = {
             id: randomUUID(),
             ...input  //tiene todos los datos ya validados de mi schema
