@@ -1,70 +1,55 @@
 import { Router } from 'express'
-import { randomUUID } from 'node:crypto'
 import { validateGame, validatePartialGame } from '../schemas/game'
-import { games } from '../data/games.json'
+import { GameModel } from '../models/game.ts'
 
 export const gamesRouter = Router()
 
-gamesRouter.get('/', (req, res, next) => {
-    res.json(games)
+gamesRouter.get('/', async (req, res, next) => {
+    const games = await GameModel.getAll()
+    return res.json(games)
 })
 
-gamesRouter.get('/:id', (req, res, next) => {
+gamesRouter.get('/:id', async (req, res, next) => {
     const { id } = req.params
 
-    const game = games.find(game => game.id === id)
+    const game = await GameModel.getById({ id })
     if (!game) {
-        res.status(404).json({ message: 'No se encontro esta partida' })
+        return res.status(404).json({ message: 'No se encontro esta partida' })
     }
     return res.json(game)
 })
 
-gamesRouter.post('/', (req, res, next) => {
+gamesRouter.post('/', async (req, res, next) => {
     const result = validateGame(req.body)
 
     if (!result.success) {
         return res.status(400).json({ error: JSON.parse(result.error.message) })
     }
-
-    const newGame = {
-        id: randomUUID(),
-        ...result.data  //tiene todos los datos ya validados de mi schema
-    }
-
-    games.push(newGame)
+    const newGame = await GameModel.create(result.data)
     return res.status(201).json(newGame)
 })
 
-gamesRouter.patch('/:id', (req, res, next) => {
+gamesRouter.patch('/:id', async (req, res, next) => {
     const result = validatePartialGame(req.body)
     if (!result.success) {
         return res.status(400).json({ error: JSON.parse(result.error.message) })
     }
 
     const { id } = req.params
-    const gameIndex = games.findIndex(game => game.id === id)
-    if (gameIndex < 0) {
-        res.status(404).json({ message: 'No se encontro esta partida' })
+    const game = await GameModel.update({ id, input: result.data })
+    if (!game) {
+        return res.status(404).json({ message: 'No se encontro esta partida' })
     }
 
-    const updatedGame = {
-        ...games[gameIndex],
-        ...result.data
-    }
-
-    games[gameIndex] = updatedGame
-
-    return res.status(200).json(updatedGame)
+    return res.status(200).json(game)
 })
 
-gamesRouter.delete('/:id', (req, res, next) => {
+gamesRouter.delete('/:id', async (req, res, next) => {
     const { id } = req.params
 
-    const gameIndex = games.findIndex(game => game.id === id)
-    if (gameIndex < 0) {
-        res.status(404).json({ message: 'No se encontro esta partida' })
+    const game = await GameModel.delete({ id })
+    if (!game) {
+        return res.status(404).json({ message: 'No se encontro esta partida' })
     }
-
-    games.splice(gameIndex, 1)
     return res.status(200).json({ message: 'Partida eliminada' })
 })

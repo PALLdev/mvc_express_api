@@ -14,13 +14,13 @@ Content-Type: application/json
             "name": "Martin"
         },
         {
-            "name": "Barbara"
+            "name": "Julio"
         }
     ]
 }
 
 ### 
-PATCH  http://localhost:8080/games/4e6cda80-fab8-4d2a-aad5-f261fa8b6fb9
+PATCH  http://localhost:8080/games/juego-1
 Content-Type: application/json
 
 {
@@ -36,5 +36,5 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:8080/games/973f91c2-55a9-4338-8153-6a251a5409a7
+DELETE http://localhost:8080/games/juego-10
 Content-Type: application/json
