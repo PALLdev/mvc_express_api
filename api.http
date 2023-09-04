@@ -20,7 +20,7 @@ Content-Type: application/json
 }
 
 ### 
-PATCH  http://localhost:8080/games/52e61763-f747-4a52-b162-bac2a152422e
+PATCH  http://localhost:8080/games/4e6cda80-fab8-4d2a-aad5-f261fa8b6fb9
 Content-Type: application/json
 
 {
@@ -36,5 +36,5 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:8080/games/52e61763-f747-4a52-b162-bac2a152422e
+DELETE http://localhost:8080/games/973f91c2-55a9-4338-8153-6a251a5409a7
 Content-Type: application/json
