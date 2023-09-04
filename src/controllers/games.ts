@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { GameModel } from "../models/local-file-system/game";
+import { GameModel } from "../models/database/game.ts";
 import { validateGame, validatePartialGame } from "../schemas/game";
 
 export class GameController {
@@ -11,7 +11,7 @@ export class GameController {
     static async getById(req: Request, res: Response) {
         const { id } = req.params
 
-        const game = await GameModel.getById({ id })
+        const game = await GameModel.getById({ id: id })
         if (!game) {
             return res.status(404).json({ message: 'No se encontro esta partida' })
         }
@@ -35,7 +35,7 @@ export class GameController {
         }
 
         const { id } = req.params
-        const game = await GameModel.update({ id, input: result.data })
+        const game = await GameModel.update({ id: id, input: result.data })
         if (!game) {
             return res.status(404).json({ message: 'No se encontro esta partida' })
         }

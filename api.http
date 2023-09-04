@@ -2,7 +2,7 @@ GET http://localhost:8080/games
 
 ###
 
-GET  http://localhost:8080/games/juego-7
+GET  http://localhost:8080/games/64f63996333a6960665f0efc
 
 ###
 POST http://localhost:8080/games
@@ -11,16 +11,25 @@ Content-Type: application/json
 {
     "players": [
         {
-            "name": "Martin"
+            "name": "Pablo"
         },
         {
-            "name": "Julio"
+            "name": "Franco"
+        },
+        {
+            "name": "Valeska"
+        },
+        {
+            "name": "Magaly"
+        },
+        {
+            "name": "Luis"
         }
     ]
 }
 
 ### 
-PATCH  http://localhost:8080/games/juego-1
+PATCH  http://localhost:8080/games/64f6368301be4f42da356494
 Content-Type: application/json
 
 {
@@ -36,5 +45,5 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:8080/games/juego-1
+DELETE http://localhost:8080/games/64f63be8fa9ad7400a7e7ac7
 Content-Type: application/json
