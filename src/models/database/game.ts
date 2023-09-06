@@ -1,8 +1,6 @@
 import { MongoClient, ObjectId, ServerApiVersion } from 'mongodb'
 
-const uri = 'mongodb+srv://pablo:YbbreYJ5NaXkxXsQ@clusterpuntosapp.cfo6t.mongodb.net/?retryWrites=true&w=majority'
-
-const client = new MongoClient(uri, {
+const client = new MongoClient(process.env.MONGO_URL!, {
     serverApi: {
         version: ServerApiVersion.v1,
         strict: true,
@@ -42,7 +40,7 @@ export class GameModel {
 
     static async getById({ id }: { id: string }) {
         const db = await connect()
-        if (!db) return
+        if (!db || !ObjectId.isValid(id)) return
         const objectId = new ObjectId(id)
         return db.findOne({ _id: objectId })
     }
@@ -58,7 +56,7 @@ export class GameModel {
 
     static async update({ id, input }: { id: string, input: any }) {
         const db = await connect()
-        if (!db) return
+        if (!db || !ObjectId.isValid(id)) return
         const objectId = new ObjectId(id)
         const { ok, value } = await db.findOneAndUpdate({ _id: objectId }, { $set: input }, { includeResultMetadata: true, returnDocument: 'after' })
         if (!ok) return false
@@ -67,9 +65,9 @@ export class GameModel {
 
     static async delete({ id }: { id: string }) {
         const db = await connect()
+        if (!db || !ObjectId.isValid(id)) return
         const objectId = new ObjectId(id)
-        const { deletedCount } = await db!.deleteOne({ _id: objectId })
+        const { deletedCount } = await db.deleteOne({ _id: objectId })
         return deletedCount > 0
     }
 }
-

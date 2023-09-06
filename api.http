@@ -2,7 +2,7 @@ GET http://localhost:8080/games
 
 ###
 
-GET  http://localhost:8080/games/64f63996333a6960665f0efc
+GET  http://localhost:8080/games/64f63af26342d50e65ffd364
 
 ###
 POST http://localhost:8080/games
@@ -29,21 +29,22 @@ Content-Type: application/json
 }
 
 ### 
-PATCH  http://localhost:8080/games/64f6368301be4f42da356494
+PATCH  http://localhost:8080/games/64f63af26342d50e65ffd364
 Content-Type: application/json
 
 {
     "players": [
         {
-            "name": "Talia",
-            "points": 300
+            "name": "Carlos",
+            "points": 200
         },
         {
-            "name": "Barbara"
+            "name": "Andres",
+            "points": 50
         }
     ]
 }
 
 ###
-DELETE http://localhost:8080/games/64f63be8fa9ad7400a7e7ac7
+DELETE http://localhost:8080/games/64f63af26342d50e65ffd364
 Content-Type: application/json
