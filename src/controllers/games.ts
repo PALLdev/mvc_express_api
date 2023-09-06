@@ -3,7 +3,7 @@ import { GameModel } from "../models/database/game.ts";
 import { validateGame, validatePartialGame } from "../schemas/game";
 
 export class GameController {
-    static async getAll(req: Request, res: Response) {
+    static async getAll(_: Request, res: Response) {
         const games = await GameModel.getAll()
         return res.json(games)
     }
@@ -24,7 +24,7 @@ export class GameController {
         if (!result.success) {
             return res.status(400).json({ error: JSON.parse(result.error.message) })
         }
-        const newGame = await GameModel.create(result.data)
+        const newGame = await GameModel.create({ input: result.data })
         return res.status(201).json(newGame)
     }
 

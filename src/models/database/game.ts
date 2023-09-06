@@ -45,7 +45,7 @@ export class GameModel {
         return db.findOne({ _id: objectId })
     }
 
-    static async create(input: any) {
+    static async create({ input }: { input: GameModel }) {
         const db = await connect()
         if (!db) return
         await db.insertOne(input)
@@ -54,7 +54,7 @@ export class GameModel {
         }
     }
 
-    static async update({ id, input }: { id: string, input: any }) {
+    static async update({ id, input }: { id: string, input: Partial<GameModel> }) {
         const db = await connect()
         if (!db || !ObjectId.isValid(id)) return
         const objectId = new ObjectId(id)
