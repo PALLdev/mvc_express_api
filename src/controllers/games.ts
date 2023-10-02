@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { GameModel } from "../models/database/game.ts";
-import { validateGame, validatePartialGame } from "../schemas/game";
+import { GameModel } from "../models/database/mysql/game.ts";
+import { validateGame, validatePartialGame } from "../schemas/game.ts";
 
 export class GameController {
     static async getAll(_: Request, res: Response) {
@@ -36,20 +36,20 @@ export class GameController {
 
         const { id } = req.params
         const game = await GameModel.update({ id: id, input: result.data })
-        if (!game) {
-            return res.status(404).json({ message: 'No se encontro esta partida' })
-        }
+        // if (!game) {
+        //     return res.status(404).json({ message: 'No se encontro esta partida' })
+        // }
 
-        return res.status(200).json(game)
+        // return res.status(200).json(game)
     }
 
     static async delete(req: Request, res: Response) {
-        const { id } = req.params
+        // const { id } = req.params
 
-        const game = await GameModel.delete({ id })
-        if (!game) {
-            return res.status(404).json({ message: 'No se encontro esta partida' })
-        }
-        return res.status(200).json({ message: 'Partida eliminada' })
+        // const game = await GameModel.delete({ id })
+        // if (!game) {
+        //     return res.status(404).json({ message: 'No se encontro esta partida' })
+        // }
+        // return res.status(200).json({ message: 'Partida eliminada' })
     }
 }
