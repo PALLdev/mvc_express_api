@@ -1,55 +1,62 @@
 import { Request, Response } from "express";
-import { GameModel } from "../models/database/mysql/game.ts";
 import { validateGame, validatePartialGame } from "../schemas/game.ts";
+import { GameModel } from "../models/database/mongodb/game.ts";
 
 export class GameController {
-    static async getAll(_: Request, res: Response) {
-        const games = await GameModel.getAll()
+
+    gameModel: typeof GameModel
+
+    constructor({ gameModel }: { gameModel: typeof GameModel }) {
+        this.gameModel = gameModel
+    }
+
+    getAll = async (_: Request, res: Response) => {
+        const games = await this.gameModel.getAll()
         return res.json(games)
     }
 
-    static async getById(req: Request, res: Response) {
+    getById = async (req: Request, res: Response) => {
         const { id } = req.params
 
-        const game = await GameModel.getById({ id: id })
+        const game = await this.gameModel.getById({ id: id })
         if (!game) {
             return res.status(404).json({ message: 'No se encontro esta partida' })
         }
         return res.json(game)
     }
 
-    static async create(req: Request, res: Response) {
+    create = async (req: Request, res: Response) => {
         const result = validateGame(req.body)
 
         if (!result.success) {
             return res.status(400).json({ error: JSON.parse(result.error.message) })
         }
-        const newGame = await GameModel.create({ input: result.data })
+        const newGame = await this.gameModel.create({ input: result.data })
         return res.status(201).json(newGame)
     }
 
-    static async update(req: Request, res: Response) {
+    update = async (req: Request, res: Response) => {
         const result = validatePartialGame(req.body)
         if (!result.success) {
             return res.status(400).json({ error: JSON.parse(result.error.message) })
         }
 
         const { id } = req.params
-        const game = await GameModel.update({ id: id, input: result.data })
-        // if (!game) {
-        //     return res.status(404).json({ message: 'No se encontro esta partida' })
-        // }
+        const game = await this.gameModel.update({ id: id, input: result.data })
+        if (!game) {
+            return res.status(404).json({ message: 'No se encontro esta partida' })
+        }
 
-        // return res.status(200).json(game)
+        return res.status(200).json(game)
     }
 
-    static async delete(req: Request, res: Response) {
-        // const { id } = req.params
+    delete = async (req: Request, res: Response) => {
+        const { id } = req.params
 
-        // const game = await GameModel.delete({ id })
-        // if (!game) {
-        //     return res.status(404).json({ message: 'No se encontro esta partida' })
-        // }
-        // return res.status(200).json({ message: 'Partida eliminada' })
+        const game = await this.gameModel.delete({ id })
+        if (!game) {
+            return res.status(404).json({ message: 'No se encontro esta partida' })
+        }
+        return res.status(200).json({ message: 'Partida eliminada' })
     }
 }

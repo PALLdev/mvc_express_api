@@ -1,11 +1,19 @@
 import { Router } from 'express'
 import { GameController } from '../controllers/games.ts'
+import { GameModel } from '../models/database/mongodb/game.ts'
 
-export const gamesRouter = Router()
+export const createGamesRouter = ({ gameModel }: { gameModel: typeof GameModel }) => {
+    const gamesRouter = Router()
 
-gamesRouter.get('/', GameController.getAll)
-gamesRouter.post('/', GameController.create)
+    const gameController = new GameController({ gameModel })
 
-gamesRouter.get('/:id', GameController.getById)
-gamesRouter.patch('/:id', GameController.update)
-gamesRouter.delete('/:id', GameController.delete)
+    gamesRouter.get('/', gameController.getAll)
+    gamesRouter.post('/', gameController.create)
+
+    gamesRouter.get('/:id', gameController.getById)
+    gamesRouter.patch('/:id', gameController.update)
+    gamesRouter.delete('/:id', gameController.delete)
+
+    return gamesRouter
+}
+

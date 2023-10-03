@@ -1,4 +1,5 @@
 import { MongoClient, ObjectId, ServerApiVersion } from 'mongodb'
+import 'dotenv/config'
 
 const client = new MongoClient(process.env.MONGO_URL!, {
     serverApi: {
@@ -24,13 +25,6 @@ async function connect() {
 }
 
 export class GameModel {
-
-    players: { name: string, points: number }[]
-
-    constructor(players: GameModel['players']) {
-
-        this.players = players
-    }
 
     static async getAll() {
         const db = await connect()
