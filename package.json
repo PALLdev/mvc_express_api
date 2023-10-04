@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "dev:mongo": "ts-node-dev src/server-with-mongo.ts",
-    "start": "node src/server-with-mongo.js"
+    "start": "node server-with-mongo.js"
   },
   "keywords": [],
   "author": "",
