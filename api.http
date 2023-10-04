@@ -2,7 +2,7 @@ GET http://localhost:8080/games
 
 ###
 
-GET  http://localhost:8080/games/as
+GET  http://localhost:8080/games/651b0fdc98e3a1b9dce4897e
 
 ###
 POST http://localhost:8080/games
@@ -46,5 +46,5 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:8080/games/sad
+DELETE http://localhost:8080/games/651dddecbee34f90e6988fc3
 Content-Type: application/json

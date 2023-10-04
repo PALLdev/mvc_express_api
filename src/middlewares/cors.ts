@@ -2,7 +2,7 @@ import cors from 'cors'
 
 // seteados por defecto
 const ACCEPTED_ORIGINS = [
-    'http://localhost:8080'
+    '*'
 ]
 
 export const corsMiddleware = ({ acceptedOrigins = ACCEPTED_ORIGINS } = {}) => cors({
